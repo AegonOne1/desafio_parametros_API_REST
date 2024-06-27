@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan';
 import errorHandler from './src/middleware/errorHandler.js'
-import postsRouter from './src/routes/routes_joyas.js'
+import routerJoyas from './src/routes/routes_joyas.js'
 import 'dotenv/config'
 
 const app = express()
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
-app.use('/', postsRouter)
+app.use('/', routerJoyas)
 
 
 //Ruta de prueba

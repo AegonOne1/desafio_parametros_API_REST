@@ -20,7 +20,7 @@ pool.query("SELECT NOW()", (err, res) => {
         console.log('Error conectando la base de datos:', err)
     }
     else {
-        console.log('Base de datos conectada', res.rows[0].now)
+        console.log('Base de datos conectada')
     }
 })
 
