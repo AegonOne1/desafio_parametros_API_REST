@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllJoyas, getAllJoyasHateoas, getAllJoyasLimit } from '../controllers/controller_joyas.js'
+import { getAllJoyas, getAllJoyasHateoas, getAllJoyasLimit, getJoyasFiltros } from '../controllers/controller_joyas.js'
 
 
 const router = Router()
@@ -12,6 +12,9 @@ const router = Router()
 
 //Ruta GET with HATEOAS
 router.get('/joyas', getAllJoyasHateoas)
+
+//Ruta Get con filtros
+router.get('/joyas/filtros', getJoyasFiltros)
 
 
 export default router

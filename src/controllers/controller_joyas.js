@@ -1,5 +1,5 @@
 import HATEOAS from "../middleware/hateoas.js"
-import { getAllJoyas_model, allJoyasModelLimit, getAllJoyasModelWithHateoas } from "../models/model_joyas.js"
+import { getAllJoyas_model, allJoyasModelLimit, getAllJoyasModelWithHateoas, getJoyasPorFiltros } from "../models/model_joyas.js"
 
 
 //GET
@@ -27,7 +27,21 @@ export const getAllJoyasLimit = async (req, res, next) => {
 
 //FILTROS Y PAGINADO
 
-
+export const getJoyasFiltros = async (req, res) => {
+    try {
+        const { precio_min, precio_max, categoria, metal } = req.query;
+        const joyas = await getJoyasPorFiltros(precio_min, precio_max, categoria, metal);
+        res.json({
+            success: true,
+            data: joyas,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
 
 
 
