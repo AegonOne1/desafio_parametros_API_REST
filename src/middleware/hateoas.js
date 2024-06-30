@@ -2,20 +2,21 @@ const HATEOAS = async (entidad, data) => {
     const results = data.map((item) => {
         return{
             name: item.nombre,
-            links: [
-                {
-                    href: `http://localhost:3000/joyas/${entidad}/${item.id}`
-                }
-            ]
+            href: `/joyas/joya/${item.id}`
         }
 
     }).slice(0,4)
+
     const total = data.length
+    const stockTotal = data.reduce((acc, item) => acc + item.stock, 0)
+
     const dataWithHateoas = {
-        total,
+        totalJoyas: total,
+        stockTotal,
         results,
     }
-    console.table(dataWithHateoas)
+
+    console.log(dataWithHateoas)
     return dataWithHateoas
 }
 

@@ -1,8 +1,8 @@
 import HATEOAS from "../middleware/hateoas.js"
-import { getAllJoyas_model, allJoyasModelLimit, getAllJoyasModelWithHateoas, getJoyasPorFiltros } from "../models/model_joyas.js"
+import { getAllJoyasModelWithHateoas, getJoyasPorFiltros } from "../models/model_joyas.js"
 
 
-//GET
+/* //GET
 export const getAllJoyas = async (req, res, next) => {
     try {
         const joyas = await getAllJoyas_model()
@@ -10,9 +10,9 @@ export const getAllJoyas = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+} */
 
-//LIMIT
+/* //LIMIT
 export const getAllJoyasLimit = async (req, res, next) => {
     try {
         const limit = parseInt(req.query.limit) || 4
@@ -21,11 +21,11 @@ export const getAllJoyasLimit = async (req, res, next) => {
     } catch (error) {
         next(error) 
     }
-}
+} */
 
 
 
-//FILTROS Y PAGINADO
+//FILTROS
 
 export const getJoyasFiltros = async (req, res) => {
     try {
@@ -45,12 +45,17 @@ export const getJoyasFiltros = async (req, res) => {
 
 
 
-//HATEOAS
+// HATEOAS
 export const getAllJoyasHateoas = async (req, res, next) => {
     try {
-        const allJoyas = await getAllJoyasModelWithHateoas()
-        const getAllJoyasHateoas = await HATEOAS('joyas', allJoyas)
-        res.status(200).json({joyas: getAllJoyasHateoas})
+        const { limits, order_by, page } = req.query
+        const allJoyas = await getAllJoyasModelWithHateoas({ limits, order_by, page })
+        const getAllJoyasHateoas = await HATEOAS('joyas', allJoyas.joyas)
+        res.status(200).json({
+            joyas: getAllJoyasHateoas,
+            paginas: allJoyas.paginas,
+            totalJoyas: allJoyas.cantidad
+        })
     } catch (error) {
         next(error)
     }

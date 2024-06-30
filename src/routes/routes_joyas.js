@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllJoyas, getAllJoyasHateoas, getAllJoyasLimit, getJoyasFiltros } from '../controllers/controller_joyas.js'
+import { getAllJoyasHateoas, getJoyasFiltros } from '../controllers/controller_joyas.js'
 
 
 const router = Router()
